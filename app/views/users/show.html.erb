@@ -1,0 +1,21 @@
+<% require 'rubygems' %>
+<% require 'mini_magick' %>
+
+<% img = MiniMagick::Image.open("app/assets/images/road.jpg") %>
+
+<% resolutions = [] %>
+<% Resolution.where(user_id: current_user.id).each {|p| resolutions << p.name} %>
+<% r = "" %>
+<% resolutions.each{|resolution| r+="\n#{resolution}"} %>
+
+<% img.combine_options do |c|
+  c.gravity 'NorthWest'
+  c.annotate "0,0", "Steph's Resolution"
+  c.draw "text 50,50 '#{r}'"
+  c.pointsize "35"
+  c.fill("#FFFFFF")
+end %>
+
+<% img.write("app/assets/images/new.jpg") %>
+
+<%=image_tag("new.jpg") %>

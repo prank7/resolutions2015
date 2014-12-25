@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create',  via: [:post, :get]
   get '/logout', to: 'sessions#destroy', via: [:get, :post]
 
-
+  match '/new_year_resolution', to: 'users#new_resolution', via: [:get]
+  match '/make_resolution', to: 'users#resolution_create', via: [:post, :put, :patch]
+  
+   
   resources :resolutions
+  resources :users
   root 'static_pages#home'
 
   # Example of regular route:

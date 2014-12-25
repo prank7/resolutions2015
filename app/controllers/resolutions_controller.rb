@@ -1,6 +1,7 @@
 class ResolutionsController < ApplicationController
 	def new
-		@resolution = Resolution.new
+		@user = current_user
+		@user = current_user.resolutions.build if current_user.resolutions.blank?
 	end
 
 	def create

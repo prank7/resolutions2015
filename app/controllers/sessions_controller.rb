@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     current_user = user
     if new_user
-      redirect_to new_resolution_path
+      redirect_to new_year_resolution_path
     else
       redirect_to '/'
     end
