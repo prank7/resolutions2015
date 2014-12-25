@@ -1,0 +1,35 @@
+.home-page-pic{
+	position: relative;
+	width: 100%;
+	height: 700px;
+	opacity: 0.9;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: asset_url('road.jpg'); 
+	text-align:center;
+}
+
+.home-page-pic p{
+    margin-top: 3.8em;
+    font-size: 2.7em;
+   	font-weight: 600;
+    display: inline-block;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: white;
+    padding: .25em 1em .25em 1em;
+}
+
+.navbar{
+	background-color:transparent;
+	border: none;
+}
+
+.navbar-default .navbar-nav>li>a:hover{
+	color:yellow;
+}
+
+.navbar .navbar-default {
+	text-align: center;
+	font-size: 1.9em;
+}
+
