@@ -3,17 +3,3 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.make-resolution{
-	width: auto;
-	height: 700px;
-	position: relative;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-image: asset_url('beach.jpg'); 
-	text-align:center;
-	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.resolution-form{
-	background-image: asset_url('food.png');
-}

@@ -33,3 +33,35 @@
 	font-size: 1.9em;
 }
 
+
+
+/* make resolution page */
+
+.make-resolution{
+	width: auto;
+	height: 700px;
+	position: relative;
+
+	background-repeat: repeat;
+	background-image: asset_url('food.png'); 
+	text-align:center;
+	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.resolution-form{
+	background-image: asset_url('');
+}
+
+
+/*Show user page */
+.show-resolution{
+	width: auto;
+	height: 700px;
+
+
+	background-repeat: repeat;
+	background-image: asset_url('food.png'); 
+
+	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+

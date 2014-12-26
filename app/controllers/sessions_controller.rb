@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     else
       redirect_to '/'
     end
-    #render json: auth
+    # render json: auth
   end
 
   def destroy

@@ -1,21 +1,85 @@
+<% content_for :head do %>
+  <title><%= @user.firstname%>'s Resolutions</title>
+  <meta property="og:site_name" content="Resolutions2015" />
+  <meta property="og:image" content="<%= asset_url('road.jpg')%>" />
+  <meta property="og:title" content="Resolutions2015: Make Resolutions for new year" />
+  <meta property="og:url" content="http://resolutions2015.com" />
+  <meta property="og:description" content="Resolutions 2015 is a platform to make new year resolutions, share them with friends through various social media channels and we help you in following these resolutions." />
+  <meta property="fb:app_id" content="425078167639341" />
+
+<% end %>
+
+<% content_for :facebook do %>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=425078167639341&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+<% end %>
+
+<% content_for :loginbutton do %>
+	<ul class="nav navbar-nav navbar-right pull-right">
+	  <li><a href="/auth/facebook"><%=image_tag("login-facebook.png", style:"width: 10em") %></a></li>
+	</ul>
+<% end %>
+
+
+
 <% require 'rubygems' %>
 <% require 'mini_magick' %>
+<% image_no = rand(1..15) %>
+<% puts image_no %>
+<% img = MiniMagick::Image.open( "app/assets/images/image#{image_no}.jpg") %>
 
-<% img = MiniMagick::Image.open("app/assets/images/road.jpg") %>
 
 <% resolutions = [] %>
-<% Resolution.where(user_id: current_user.id).each {|p| resolutions << p.name} %>
+<% Resolution.where(user_id: @user.id).each {|p| resolutions << p.name} %>
 <% r = "" %>
 <% resolutions.each{|resolution| r+="\n#{resolution}"} %>
 
 <% img.combine_options do |c|
   c.gravity 'NorthWest'
-  c.annotate "0,0", "Steph's Resolution"
-  c.draw "text 50,50 '#{r}'"
-  c.pointsize "35"
+  c.annotate "0,0,270,20", "#{@user.firstname}'s Resolutions"
+  c.draw "text 50,40 '#{r}'"
+  c.pointsize "45"
   c.fill("#FFFFFF")
 end %>
 
-<% img.write("app/assets/images/new.jpg") %>
 
-<%=image_tag("new.jpg") %>
+	<% img.write("app/assets/images/users/#{@user.uid}.jpg") %>
+
+
+
+<div class="container show-resolution">
+	<div class="row">
+		<%= render partial: "layouts/header" %>
+		<div class=" col-md-offset-2 col-md-8 resolutions-image" > 
+			<%= image_tag("users/#{@user.uid}.jpg", style:"height: 33em; width: 100%;") %>
+		</div>
+		<div class="col-md-2 pull-left">
+		<%= link_to "Download Image", asset_url("users/#{@user.uid}.jpg"), download: "#{@user.uid}.jpg", class: "btn btn-info" %>
+
+				<a href="//www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"  data-pin-color="red" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_28.png" /></a>
+
+				<a href="https://twitter.com/share" class="twitter-share-button" data-text="Here's my resolution for 2015. What about you? checkout resolutions2015.com" data-via="dprank" data-size="large" data-hashtags="resolutions2015">Tweet</a>
+
+				<a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+<br>
+				<script src="//platform.linkedin.com/in.js" type="text/javascript">
+				  lang: en_US
+				</script>
+				<script type="IN/Share" data-counter="right"></script>
+
+				<div class="fb-share-button" data-href="http://localhost:3000/users/1" data-layout="button_count"></div>
+
+		</div>
+		
+	</div>
+</div>
+<!-- Please call pinit.js only once per page -->
+<script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+

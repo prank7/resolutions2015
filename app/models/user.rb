@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 			email: auth.info['email'],
 			image: auth.info['image'],
 			name: auth.info['name'],
-			gender: auth.extra.raw_info['gender'])
+			gender: auth.extra.raw_info['gender'],
+			firstname: auth.info['first_name'])
 	end
 end
