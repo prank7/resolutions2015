@@ -1,9 +1,10 @@
+<% @title = "show" %>
 <% content_for :head do %>
   <title><%= @user.firstname%>'s Resolutions</title>
   <meta property="og:site_name" content="Resolutions2015" />
   <meta property="og:image" content="<%= asset_url('road.jpg')%>" />
   <meta property="og:title" content="Resolutions2015: Make Resolutions for new year" />
-  <meta property="og:url" content="http://resolutions2015.com" />
+  <meta property="og:url" content="http://resolutions2015.com/users/<%=@user.id %>" />
   <meta property="og:description" content="Resolutions 2015 is a platform to make new year resolutions, share them with friends through various social media channels and we help you in following these resolutions." />
   <meta property="fb:app_id" content="425078167639341" />
 
@@ -21,18 +22,18 @@
 <% end %>
 
 <% content_for :loginbutton do %>
-	<ul class="nav navbar-nav navbar-right pull-right">
+	
 	  <li><a href="/auth/facebook"><%=image_tag("login-facebook.png", style:"width: 10em") %></a></li>
-	</ul>
+	
 <% end %>
 
 
 
 <% require 'rubygems' %>
 <% require 'mini_magick' %>
-<% image_no = rand(1..15) %>
+<% image_no = rand(1..16) %>
 <% puts image_no %>
-<% img = MiniMagick::Image.open( "app/assets/images/image#{image_no}.jpg") %>
+<% img = MiniMagick::Image.open( "app/assets/images/grad/image#{image_no}.jpg") %>
 
 
 <% resolutions = [] %>
@@ -42,10 +43,12 @@
 
 <% img.combine_options do |c|
   c.gravity 'NorthWest'
-  c.annotate "0,0,270,20", "#{@user.firstname}'s Resolutions"
-  c.draw "text 50,40 '#{r}'"
-  c.pointsize "45"
-  c.fill("#FFFFFF")
+  c.annotate "0,0,250,20", "#{@user.firstname}'s Resolutions"
+  c.draw "text 60,30 '#{r}'"
+  c.font "#{::Rails.root}/public/Montserrat-Bold.ttf"
+  c.pointsize "42"
+  c.kerning '0'
+  c.fill "#FFFFFF"
 end %>
 
 
@@ -56,24 +59,33 @@ end %>
 <div class="container show-resolution">
 	<div class="row">
 		<%= render partial: "layouts/header" %>
-		<div class=" col-md-offset-2 col-md-8 resolutions-image" > 
+		<div class=" col-md-offset-1 col-md-8 resolutions-image" > 
 			<%= image_tag("users/#{@user.uid}.jpg", style:"height: 33em; width: 100%;") %>
 		</div>
 		<div class="col-md-2 pull-left">
-		<%= link_to "Download Image", asset_url("users/#{@user.uid}.jpg"), download: "#{@user.uid}.jpg", class: "btn btn-info" %>
-
+		<% if (signed_in? && current_user.id == @user.id) %>
+			<%= link_to "Download As Wallpaper", asset_url("users/#{@user.uid}.jpg"), download: "#{@user.uid}.jpg", class: "btn btn-info" %>
+			<br><br>
+			<%= link_to "Change Background Img", "#", class: "btn btn-info", onclick: "location.reload(true);" %>
+		<% end %>
+<br>
+<br>
+				<div class="fb-share-button" data-href="<%= user_url(@user.id) %>" data-layout="button_count"></div>
+<br>
 				<a href="//www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"  data-pin-color="red" data-pin-height="28"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_28.png" /></a>
-
+<br>
 				<a href="https://twitter.com/share" class="twitter-share-button" data-text="Here's my resolution for 2015. What about you? checkout resolutions2015.com" data-via="dprank" data-size="large" data-hashtags="resolutions2015">Tweet</a>
-
+<br>
 				<a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
 <br>
 				<script src="//platform.linkedin.com/in.js" type="text/javascript">
 				  lang: en_US
 				</script>
 				<script type="IN/Share" data-counter="right"></script>
-
-				<div class="fb-share-button" data-href="http://localhost:3000/users/1" data-layout="button_count"></div>
+<br>
+				<a href="http://www.tumblr.com/share/photo?source=<%=u "#{user_url(@user.id)}" %>&caption=<%=u "Resolutions" %>&clickthru=<%=u user_url(@user.id) %>" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('https://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;">Share on Tumblr</a>
+<br>
+				<div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
 
 		</div>
 		
@@ -83,3 +95,10 @@ end %>
 <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
+
+<script src="http://platform.tumblr.com/v1/share.js"></script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+<%= render partial: "layouts/footer" %>

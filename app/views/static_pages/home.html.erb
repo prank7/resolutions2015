@@ -9,16 +9,61 @@
 
 <% end %>
 
-<div class="home-page-pic container-fluid">
-<%= render partial: "layouts/header" %>
-  <div class="row">
-    <div class="" >
-      <p>Make New Year Resolutions, Share And Keep On Track</p>
-    </div>
-  </div>
 
-<div class="primary">
-  <a href="/auth/facebook"><button class="btn" style="background-color: transparent"><%=image_tag("login-facebook.png", style:"width: 50%") %></button></a>
+<% unless signed_in? %>
+	<div class="home-page-pic container-fluid">
+		<%= render partial: "layouts/header" %>
+		  <div class="row">
+		    <div class="" >
+		      <h1>Make New Year Resolutions, Share And Keep On Track</h1>
+		    </div>
+		  </div>
 
-</div>
-</div>
+		<div class="primary">
+		  <a href="/auth/facebook"><button class="btn" style="background-color: transparent"><%=image_tag("login-facebook.png", style:"width: 50%") %></button></a>
+		</div>
+	</div>
+
+
+	<div class="container-fluid homepage-description">
+		<div class="row  panel-primary text-center">
+			<div class="col-md-4 text-center">
+				<h3>Make</h3>
+					<%= image_tag "make-resolution.png"%>
+					<br>
+				<h5>Make your Resolutions, crisp and clear</h5>
+			</div>
+			<div class="col-md-4">
+				<h3>Download & Share</h3>
+				<%= image_tag "share-resolution.png"%>
+				<br>
+				<br>
+				<h5>Download Resolutions as Image, make wallpaper and share on social media</h5>
+			</div>
+			<div class="col-md-4">
+				<h3>Track</h3>
+				<%= image_tag "track-resolution.png"%>
+				<br>
+				<h5>Get Friendly Reminder for next 21 days</h5>
+			</div>
+		</div>
+	</div>
+
+<% else %>
+<% imgno= rand(1..3) %>
+	<div class="home-page-after-signin run<%=imgno%> container-fluid">
+		<%= render partial: "layouts/header" %>
+		  <div class="row">
+		    <div class="" >
+		      <h1>Happy New Year 2015</h1>
+		      <h3>make the best of it</h3>
+		    </div>
+		  </div>
+
+		<div class="primary">
+		  
+		</div>
+	</div>
+<% end %>
+
+<%= render partial: "layouts/footer" %>

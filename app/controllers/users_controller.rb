@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_action :redirect_unless_signed_in, only: [:new_resolution, :resolution_create]
+	
 	def new_resolution
 		@user = current_user
 		if current_user.resolutions.blank?
@@ -22,8 +24,9 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+private
 	def user_params
-    params.require(:user).permit(resolutions_attributes: [:id, :name, :_destroy])
+    params.require(:user).permit(:notification, resolutions_attributes: [:id, :name, :_destroy])
   end
 
 end

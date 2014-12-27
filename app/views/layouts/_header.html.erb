@@ -18,18 +18,41 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <% if signed_in? %>
           <ul class="nav navbar-nav">
-            <li><a href="/new_year_resolution">My Resolutions<span class="sr-only">(current)</span></a></li>
+            <li <%if @title=="new" %> class="active"<%end%>><a href="/new_year_resolution">My Resolutions<span class="sr-only">(current)</span></a></li>
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to("Hey #{current_user.firstname}", user_path(current_user)) %></li>
+            <li><a href="#" data-toggle="modal" data-target="#donate">Donate</a></li>
+            
+                <li <%if @title=="show" %> class="active"<%end%>><%= link_to("Hey #{current_user.firstname}", user_path(current_user))%></li>
             <li><a href="/logout">Logout</a></li>
-          </ul>
         <% else %>
+        <ul class="nav navbar-nav navbar-right pull-right">
+          <li><a href="#" data-toggle="modal" data-target="#donate">Donate</a></li>
           <%= yield :loginbutton %>
+        </ul>
         <% end %>
 
       </div><!-- /.navbar-collapse -->
     
   </div><!-- /.container-fluid -->
 </nav>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+<div class="modal fade bs-example-modal-sm" id="donate" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buy Us an Egg Puff</h4>
+      </div>
+      <div class="modal-body">
+        <a href="https://gratipay.com/prank7/"><button class="btn btn-info">Donate via Gratipay</button></a>
+      </div>
+    </div>
+  </div>
+</div>

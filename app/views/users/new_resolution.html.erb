@@ -1,11 +1,12 @@
+<% @title = "new" %>
 <% content_for :head do %>
   <title>Your Resolutions</title>
 <% end %>
 
 <div class="container make-resolution">
 <%= render partial: "layouts/header" %>
-	<div class="col-md-offset-4 col-md-4 text-center">
-	Make your Resolutions
+	<div class="col-md-offset-4 col-md-4 text-center" style="color: #4582ec; margin-top: -3em; margin-bottom: 0em;">
+	<h2>Make your Resolutions</h2>
 	</div>
 
 	<div class="col-md-offset-2 col-md-8 text-center resolution-form">
@@ -20,7 +21,10 @@
 						<%= p.text_field :name, class: "form-control", placeholder: "Resolution #{i}", maxlength: 47 %>
 							 </div>
 					<% end %>
-				<%= f.submit "Sumbit" %>
+				<%= f.label "We can remind you for next 21 days with different wallpapers, should we?" , style: "color: white;"%>
+				<%= f.check_box :notification %>
+				<br>
+				<%= f.submit "Let's Get Started!", class: "btn btn-info", style: "background-color: #4582ec; color: white;  font-weight: bold" %>
 				<% end %>
 
 			</div>
@@ -29,7 +33,7 @@
 </div>
 
 </div>
-
+<%= render partial: "layouts/footer" %>
 
 <style>
 .float-label-control { position: relative; margin-bottom: 0.7em; }
