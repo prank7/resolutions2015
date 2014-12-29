@@ -101,7 +101,7 @@
 .homepage-description{
 	color: white;
 	background-repeat: repeat;
-	height: 25em;
+	height: 32em;
   background-color: #f5f5f5;
   background-image: asset_url('food.png'); 
 	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -109,13 +109,20 @@
 }
 
 .homepage-description h5{
-	color: #4582ec;
+	#color: #4582ec;
+}
+
+.bs-philoshopy h4{
+  margin-top:-0.6em;
+}
+.bs-callout{
+  padding-bottom: 0.4em;
+}
+.bs-philoshophy p:last{
+  margin-bottom: -1em;
 }
 
 
-
-
- /* -------------------------*/
    .footer{
     background-image: asset_url("stardust.png");
     background-repeat: repeat;

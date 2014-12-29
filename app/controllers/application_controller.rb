@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
       self.current_user = nil
   end
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
 
   def redirect_unless_signed_in
       unless signed_in?
@@ -38,5 +42,4 @@ class ApplicationController < ActionController::Base
         redirect_to root_url, notice: "Please sign in."
       end
   end
-
 end

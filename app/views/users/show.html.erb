@@ -29,30 +29,6 @@
 
 
 
-<% require 'rubygems' %>
-<% require 'mini_magick' %>
-<% image_no = rand(1..16) %>
-<% puts image_no %>
-<% img = MiniMagick::Image.open("app/assets/images/grad/image1.jpg") %>
-
-
-<% resolutions = [] %>
-<% Resolution.where(user_id: @user.id).each {|p| resolutions << p.name} %>
-<% r = "" %>
-<% resolutions.each{|resolution| r+="\n#{resolution}"} %>
-
-<% img.combine_options do |c|
-  c.gravity 'NorthWest'
-  c.annotate "0,0,250,20", "#{@user.firstname}'s Resolutions"
-  c.draw "text 60,30 '#{r}'"
-  c.font "#{::Rails.root}/public/Montserrat-Bold.ttf"
-  c.pointsize "42"
-  c.kerning '0'
-  c.fill "#FFFFFF"
-end %>
-
-
-	<% img.write("app/assets/images/users/#{@user.uid}.jpg") %>
 
 
 
